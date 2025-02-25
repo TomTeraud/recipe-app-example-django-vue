@@ -1,0 +1,30 @@
+
+services:
+  backend:
+    build: ./recipe_app_backend_minimal
+    ports:
+      - "8000:8000"
+    volumes:
+      - sqlite_data:/app/db
+      - media_data:/app/media
+    environment:
+      - DEBUG=True
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000"]
+      interval: 10s
+      retries: 5
+      start_period: 20s
+
+  frontend:
+    build:
+      context: ./vue-practice-tom
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./vue-practice-tom:/app
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+
+volumes:
+  sqlite_data:
+  media_data:
