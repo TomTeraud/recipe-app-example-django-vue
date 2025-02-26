@@ -18,8 +18,6 @@ services:
     image: tomsterauds/frontend:latest
     ports:
       - "5173:5173"
-    volumes:
-      - ./vue-practice-tom:/app
     environment:
       - CHOKIDAR_USEPOLLING=true
 
